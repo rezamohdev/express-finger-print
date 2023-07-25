@@ -24,6 +24,13 @@ module.exports.login = (req, res) => {
             }
             // comparing the submitted password and hash from the database
             return bcrypt.compare(password, user.password);
+        }).then((matched) => {
+            if (!matched) {
+                // the hashes didn't match, rejecting the promise
+                return Promise.reject(new Error('Incorrect password or email'));
+            }
+            // successful authentication
+            res.send({ message: 'Everything good!' });
         })
         .catch((err) => {
             res
