@@ -42,7 +42,6 @@ app.post('/signin', (req, res) => {
 
     return User.findUserByCredentials(email, password)
         .then((user) => {
-            // write your code here
             if (!user) {
                 return Promise.reject(new Error('Incorrect password or email'));
             }
